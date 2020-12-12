@@ -1,0 +1,26 @@
+{
+  "name": "camp202011-react-works-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nbkobayashi/camp202011-react-works-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nbkobayashi/camp202011-react-works-backend/issues"
+  },
+  "homepage": "https://github.com/nbkobayashi/camp202011-react-works-backend#readme",
+  "dependencies": {
+    "@bombitmanbomb/neosjs": "^1.7.6",
+    "express": "^4.17.1",
+    "firebase": "^8.2.0",
+    "node-fetch": "^2.6.1",
+    "ws": "^7.4.0"
+  }
+}
