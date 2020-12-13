@@ -7,6 +7,8 @@ global.fetch = require("node-fetch");
 var express = require("express");
 var app = express();
 
+const moment = require("moment");
+
 // Constants
 const fireConfig = {
   apiKey: env.FIREBASE_API_KEY,
@@ -56,6 +58,18 @@ const sendMessage = async (value, uid) => {
   }
 };
 
+const timestampToTime = timestamp => {
+  const date = new Date(timestamp * 1000);
+  const yyyy = `${date.getFullYear()}`;
+  const MM = `0${date.getMonth() + 1}`.slice(-2);
+  const dd = `0${date.getDate()}`.slice(-2);
+  const HH = `0${date.getHours()}`.slice(-2);
+  const mm = `0${date.getMinutes()}`.slice(-2);
+  const ss = `0${date.getSeconds()}`.slice(-2);
+
+  return `${yyyy}/${MM}/${dd} ${HH}:${mm}:${ss}`;
+};
+
 // HTTP
 app.get("/", function(req, res) {
   fetch(
@@ -79,14 +93,21 @@ app.get("/chat", function(req, res) {
     .then(response => response.json())
     .then(json => {
       json.documents.sort(function(a, b) {
-        if (a.createTime > b.createTime) return -1;
-        if (a.createTime < b.createTime) return 1;
+        if (a.createTime < b.createTime) return -1;
+        if (a.createTime > b.createTime) return 1;
         return 0;
       });
 
       let result = "";
       json.documents.forEach(element => {
-        result = result + element.fields.text.stringValue + "\r\n";
+        result =
+          result +
+          moment(element.fields.createdAt.timestampValue).format(
+            "YYYY-MM-DD HH:mm:ss"
+          ) +
+          ": " +
+          element.fields.text.stringValue +
+          "\r\n";
       });
       res.send(result);
     });
