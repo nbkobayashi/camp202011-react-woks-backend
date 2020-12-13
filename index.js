@@ -1,11 +1,11 @@
-var env = require("./env.json");
-var firebase = require("firebase");
+const env = require("./env.json");
+const firebase = require("firebase");
 require("firebase/firestore");
 require("firebase/auth");
 
 global.fetch = require("node-fetch");
-var express = require("express");
-var app = express();
+const express = require("express");
+const app = express();
 
 const moment = require("moment");
 
